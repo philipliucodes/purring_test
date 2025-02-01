@@ -1,14 +1,12 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import './App.css'
-
 import Header from './components/Header'
-import BlueBox from './components/BlueBox'
+import BoxList from './components/boxes/BoxList'
 import AnswerInput from './components/AnswerInput'
 
 const INITIAL_REWARD_POINTS = 100
 
-function App() {
+function App() {  
   const [rewardPoints, setRewardPoints] = useState(INITIAL_REWARD_POINTS)
   const [answer, setAnswer] = useState('')
 
@@ -25,58 +23,33 @@ function App() {
     setAnswer(e.target.value)
   }
 
+  const handleSubmit = () => {
+    // TODO: Add submit logic here
+    console.log('Submitted answer:', answer)
+  }
+
+  const handleClear = () => {
+    setAnswer('')
+  }
+
   return (
-      <div className="min-h-screen bg-gray-100">
-        <Header title="PURRING TEST" rewardPoints={rewardPoints} />
+    <>
+      <Header title="PURRING TEST" rewardPoints={rewardPoints} />
+      <div className="container mx-auto px-4 py-6">
+        <h2 className="text-2xl font-bold mb-6">Category: Thing</h2>
+        
+        <BoxList onDecrease={decreaseReward} />
 
-        <div className="container mx-auto px-4 py-6">
-          <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6"
-          >
-            <h2 className="text-2xl font-bold text-gray-800">
-              Category: Thing
-            </h2>
-          </motion.div>
-
-          <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: {
-                    staggerChildren: 0.1,
-                  },
-                },
-              }}
-          >
-            <BlueBox
-                prompt="Write a riddle with this thing as the answer."
-                buttonText="[FREE]"
-                onGenerate={() => decreaseReward(0)}
-            />
-            <BlueBox
-                prompt="Imagine a steampunk version of this thing."
-                buttonText="GENERATE [-4 🧶]"
-                onGenerate={() => decreaseReward(4)}
-            />
-            <BlueBox
-                prompt="Draw this thing as a cat."
-                buttonText="GENERATE [-6 🧶]"
-                onGenerate={() => decreaseReward(6)}
-            />
-          </motion.div>
-
-          <div className="flex justify-center">
-            <AnswerInput value={answer} onChange={handleAnswerChange} />
-          </div>
+        <div className="flex justify-center">
+          <AnswerInput 
+            value={answer}
+            onChange={handleAnswerChange}
+            onSubmit={handleSubmit}
+            onClear={handleClear}
+          />
         </div>
       </div>
+    </>
   )
 }
 

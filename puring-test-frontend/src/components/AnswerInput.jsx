@@ -1,47 +1,44 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Edit3 } from 'lucide-react'
+import PropTypes from 'prop-types';
 
-/**
- * A highly-stylized input field with framer-motion animations and icon from lucide-react.
- *
- * Props:
- *   - value: current text value
- *   - onChange: function to handle input changes
- */
-const AnswerInput = ({ value, onChange }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeInOut' }}
-            className="flex flex-col items-center w-full max-w-sm mt-8 mx-auto"
+const AnswerInput = ({ value, onChange, onSubmit, onClear }) => {
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div className="w-64">
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+          placeholder="Type your answer..."
+          className="w-full px-4 py-3 rounded-lg border border-gray-300 shadow-md 
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 
+                   transition-colors text-black placeholder-gray-400"
+        />
+      </div>
+      <div className="flex gap-4">
+        <button
+          onClick={onSubmit}
+          className="px-6 py-2 bg-blue-500 text-black font-semibold rounded-lg 
+                   shadow-md hover:bg-blue-600 transition-colors"
         >
-            <div className="flex items-center space-x-2 mb-2">
-                <Edit3 className="text-gray-600 w-5 h-5" />
-                <label htmlFor="answer" className="text-gray-800 font-semibold text-lg">
-                    Your Answer
-                </label>
-            </div>
+          Submit
+        </button>
+        <button
+          onClick={onClear}
+          className="px-6 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg 
+                   shadow-md hover:bg-gray-300 transition-colors"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+  );
+};
 
-            <motion.input
-                whileFocus={{ scale: 1.02 }}
-                type="text"
-                id="answer"
-                value={value}
-                onChange={onChange}
-                placeholder="Type your answer..."
-                className="
-          w-full px-4 py-3
-          rounded-lg border border-gray-300
-          bg-white shadow-sm
-          focus:outline-none focus:ring-2 focus:ring-purple-500
-          transition-all duration-200
-          text-gray-800 placeholder-gray-400
-        "
-            />
-        </motion.div>
-    )
-}
+AnswerInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired
+};
 
-export default AnswerInput
+export default AnswerInput;
