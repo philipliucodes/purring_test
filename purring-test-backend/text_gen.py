@@ -18,7 +18,7 @@ text_clue_prompts = [
     "Generate a tweet about {}",
 ]
 
-generation_config = genai.GenerationConfig(temperature=0.5, max_output_tokens=100)
+generation_config = genai.GenerationConfig(temperature=0.9, max_output_tokens=100)
 
 def gen_text_clue(answer):
     prompt = random.choice(text_clue_prompts).format(answer)
@@ -29,7 +29,8 @@ def gen_text_clue(answer):
     """.format(prompt, answer, answer)
     response = model.generate_content(full_prompt, generation_config=generation_config)
     print(response.text)
+    return prompt, response.text
 
 
-
+gen_text_clue("Dune 2")
 
