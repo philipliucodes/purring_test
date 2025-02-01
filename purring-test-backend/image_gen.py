@@ -10,7 +10,6 @@ API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=API_KEY)
 client = genai.Client(api_key='GEMINI_API_KEY')
 
-
 prompts = [
     "Draw {} in modern abstract art",
     "Draw {} as an art deco",
@@ -39,10 +38,7 @@ prompts = [
 def gen_image_clue(answer):
     prompt = random.choice(prompts).format(answer)
     print("Prompt: ", prompt)
-    full_prompt = """
-    {}
-    Your image should hint at {} but not reveal it.
-    """.format(prompt, answer)
+    full_prompt = f"{prompt}. Your image should hint at {answer} but not reveal it."
 
     response = client.models.generate_image(
         model='imagen-3.0-generate-002',
