@@ -46,5 +46,3 @@ def generate_answer():
     except Exception as e:
         print(f"Error generating word: {e}")
         return None
-
-print(generate_answer())

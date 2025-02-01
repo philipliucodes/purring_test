@@ -49,5 +49,3 @@ def gen_image_clue(answer):
         n=1,
     )
     return prompt, response.data[0].b64_json
-
-gen_image_clue("Dune 2")
