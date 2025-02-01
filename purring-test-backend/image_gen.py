@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI()
 
-
 prompts = [
     "Draw {} in modern abstract art",
     "Draw {} as an art deco",
@@ -35,10 +34,7 @@ prompts = [
 def gen_image_clue(answer):
     prompt = random.choice(prompts).format(answer)
     print("Prompt: ", prompt)
-    full_prompt = """
-    {}
-    Your image should hint at {} but not reveal it.
-    """.format(prompt, answer)
+    full_prompt = f"{prompt}. Your image should hint at {answer} but not reveal it."
 
     response = client.images.generate(
         model="dall-e-3",

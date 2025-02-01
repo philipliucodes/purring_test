@@ -1,8 +1,7 @@
 from flask import Flask
 from answer_generator import *
 from text_gen import *
-
-
+from image_gen import *
 
 def generate_game():
     game = {}
@@ -29,10 +28,6 @@ def generate_game():
     return game
 
 app = Flask(__name__)
-
-@app.route('/what_you_asked', methods=['GET'])
-def api():
-    return {'its':'done'}
 
 @app.route('/api/new_game', methods=['GET'])
 def new_game():
