@@ -50,15 +50,7 @@ const Header = ({ title = 'PURRING TEST', rewardPoints }) => {
           <span className="text-lg font-semibold uppercase tracking-wider drop-shadow-sm">
             Reward:
           </span>
-                    <motion.div
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                        transition={{
-                            duration: 0.4,
-                            repeat: Infinity,
-                            repeatType: 'mirror',
-                            ease: 'easeInOut'
-                        }}
+                    <div
                         className="
               flex items-center space-x-2
               px-3 py-1 rounded-full
@@ -71,7 +63,7 @@ const Header = ({ title = 'PURRING TEST', rewardPoints }) => {
               {rewardPoints}
             </span>
                         <Volleyball className="w-5 h-5" />
-                    </motion.div>
+                    </div>
                 </div>
 
                 {/* Right Buttons */}
