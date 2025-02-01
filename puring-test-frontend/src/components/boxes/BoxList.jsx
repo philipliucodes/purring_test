@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BlueBox from './BlueBox';
 import GreyBox from './GreyBox';
@@ -10,10 +10,21 @@ const BoxList = ({ onDecrease }) => {
     2: null
   });
 
+  useEffect(() => {
+    const getGameData = async () => {
+      const game_data = await fetch('http://localhost:5000/new_game')
+      const game_data_json = await game_data.json()
+      console.log(game_data_json)
+      return game_data_json;
+    }
+    const game_data = getGameData();
+    console.log(game_data);
+  }, []);
+
   const handleGenerate = (index, deduction) => {
     // Simulated content - replace with actual API response later
     const content = index === 2 ? {
-      imageUrl: 'https://picsum.photos/300'  // Example image URL
+      imageUrl: 'https://example.com/image.jpg'  // Example image URL
     } : {
       generatedText: "And blood-black nothingness began to spin... A system of cells interlinked within cells interlinked within cells interlinked within one stem... And dreadfully distinct against the dark, a tall white fountain played."
     };
