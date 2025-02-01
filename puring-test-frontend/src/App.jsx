@@ -1,33 +1,29 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Header from './components/Header'
+
+const INITIAL_REWARD_POINTS = 100 // Define initial value as a constant
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [rewardPoints, 
+    //setRewardPoints
+  ] = useState(INITIAL_REWARD_POINTS)
+
+  // Function to decrease rewards only,  uncomment when need
+  // const decreaseReward = (deduction) => {
+  //   if (deduction < 0) {
+  //     console.warn('Deduction should be a positive number')
+  //     return
+  //   }
+  //   setRewardPoints(prevPoints => Math.max(0, prevPoints - deduction))
+  // }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header title="PURRING TEST" rewardPoints={rewardPoints} />
+      <div className="container mx-auto px-4 py-6">
+        {/* Other content goes here */}
       </div>
-      <h1 className="text-3xl font-bold underline">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
