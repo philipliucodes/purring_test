@@ -4,10 +4,10 @@ import Header from './components/Header'
 
 const INITIAL_REWARD_POINTS = 100 // Define initial value as a constant
 
-function App() {
+function App() {  
   const [rewardPoints, 
     //setRewardPoints
-  ] = useState(INITIAL_REWARD_POINTS)
+  ] = useState(INITIAL_REWARD_POINTS);
 
   // Function to decrease rewards only,  uncomment when need
   // const decreaseReward = (deduction) => {
@@ -28,4 +28,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
