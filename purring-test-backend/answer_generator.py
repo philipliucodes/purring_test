@@ -35,16 +35,14 @@ def generate_answer():
     global categories
 
     category = random.choice(categories)
-
+    prompt = f"Give me a single random word from the category '{category}'. Just return the word, nothing else."
+    
     configure_gemini()
     model = genai.GenerativeModel("gemini-pro")
 
     try:
-        prompt = f"Give me a single random word from the category '{category}'. Just return the word, nothing else."
         response = model.generate_content(prompt)
         return (category, response.text.strip())
     except Exception as e:
         print(f"Error generating word: {e}")
         return None
-
-print(generate_answer())

@@ -30,7 +30,3 @@ def gen_text_clue(answer):
     response = model.generate_content(full_prompt, generation_config=generation_config)
     print(response.text)
     return prompt, response.text
-
-
-gen_text_clue("Dune 2")
-
