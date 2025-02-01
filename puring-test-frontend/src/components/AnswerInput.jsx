@@ -52,7 +52,7 @@ const AnswerInput = ({ value, onChange, onSubmit, onClear }) => {
           <button
               onClick={onSubmit}
               className="
-            px-6 py-2 bg-purple-500 text-white font-semibold rounded-lg
+            px-6 py-2 bg-purple-500 text-black font-semibold rounded-lg
             shadow-md hover:bg-purple-600 transition-colors
           "
           >
