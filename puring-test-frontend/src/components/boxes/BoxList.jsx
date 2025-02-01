@@ -13,7 +13,7 @@ const BoxList = ({ onDecrease }) => {
   const handleGenerate = (index, deduction) => {
     // Simulated content - replace with actual API response later
     const content = index === 2 ? {
-      imageUrl: 'https://example.com/image.jpg'  // Example image URL
+      imageUrl: 'https://picsum.photos/300'  // Example image URL
     } : {
       generatedText: "And blood-black nothingness began to spin... A system of cells interlinked within cells interlinked within cells interlinked within one stem... And dreadfully distinct against the dark, a tall white fountain played."
     };
