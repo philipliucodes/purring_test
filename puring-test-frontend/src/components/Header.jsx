@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
-import { HelpCircle, Info, Volleyball, X } from 'lucide-react'
+import { HelpCircle, HelpCircleIcon, Info, InfoIcon, X } from 'lucide-react'
 
 /**
  * A modern, stylized header component with centered reward info, vibrant styling,
@@ -46,23 +46,24 @@ const Header = ({ title = 'PURRING TEST', rewardPoints }) => {
                 </motion.div>
 
                 {/* Center Reward Info */}
-                <div className="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3">
-          <span className="text-lg font-semibold uppercase tracking-wider drop-shadow-sm">
-            Reward:
-          </span>
+                <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
+                    <span className="text-lg font-semibold uppercase tracking-wider drop-shadow-sm">
+                        Reward:
+                    </span>
                     <div
                         className="
-              flex items-center space-x-2
+              flex items-center gap-1
               px-3 py-1 rounded-full
               bg-white/20
               shadow-md
               hover:bg-white/30 transition-colors
             "
                     >
-            <span className="text-lg font-bold drop-shadow-sm">
-              {rewardPoints}
-            </span>
-                        <Volleyball className="w-5 h-5" />
+                        <span className="text-lg font-bold drop-shadow-sm">
+                            {rewardPoints}
+                        </span>
+                        🧶
+                        {/* <Volleyball className="w-5 h-5" /> */}
                     </div>
                 </div>
 
@@ -74,32 +75,27 @@ const Header = ({ title = 'PURRING TEST', rewardPoints }) => {
                     className="flex space-x-3"
                 >
                     {/* Help Button */}
-                    <button
-                        className="
-              w-9 h-9 flex items-center justify-center
-              bg-white/20 rounded-full
-              hover:bg-white/30 transition-colors
-              text-white
-            "
-                        aria-label="help"
-                        onClick={handleHelpOpen}
+                    <motion.button
+                        onClick={handleHelpOpen
+                        }
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                        className={`flex items-center justify-center text-sm font-bold rounded-lg shadow-md uppercase transition-colors text-black px-0 py-0
+                        }`}
                     >
-                        <HelpCircle className="text-white w-5 h-5" />
-                    </button>
+                        <HelpCircleIcon className="w-5 h-5 px-0 py-0" />
+                    </motion.button>
 
                     {/* Info Button */}
-                    <button
-                        className="
-              w-9 h-9 flex items-center justify-center
-              bg-white/20 rounded-full
-              hover:bg-white/30 transition-colors
-              text-white
-            "
-                        aria-label="information"
+                    <motion.button
                         onClick={handleInfoOpen}
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.2 }}
+                        className={`flex items-center justify-center text-sm font-bold rounded-lg shadow-md uppercase transition-colors text-black px-0 py-0
+                        }`}
                     >
-                        <Info className="text-white w-5 h-5" />
-                    </button>
+                        <InfoIcon className="w-5 h-5" />
+                    </motion.button>
                 </motion.div>
             </motion.header>
 
@@ -145,10 +141,10 @@ const HelpModal = ({ isOpen, onClose }) => {
                     onClick={onClose}
                     className="absolute top-2 right-2 text-gray-100 hover:text-gray-700"
                 >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5 text-black" />
                 </button>
                 <h2 className="text-xl font-bold mb-4 flex items-center space-x-2 ">
-                    <HelpCircle className="w-6 h-6 " />
+                    <HelpCircle className="w-6 h-6 text-black" />
                     <span>Help Options</span>
                 </h2>
                 <p className="mb-4">
@@ -157,7 +153,7 @@ const HelpModal = ({ isOpen, onClose }) => {
                 </p>
                 <button
                     onClick={onClose}
-                    className="inline-flex items-center px-4 py-2 mt-2 bg-cyan-600 text-white rounded hover:bg-cyan-700"
+                    className="inline-flex items-center px-4 py-2 mt-2 bg-cyan-600 text-black rounded hover:bg-cyan-700"
                 >
                     Close
                 </button>
@@ -197,19 +193,19 @@ const InfoModal = ({ isOpen, onClose }) => {
                     onClick={onClose}
                     className="absolute top-2 right-2 text-gray-100 hover:text-gray-700"
                 >
-                    <X className="w-5 h-5" />
+                    <X className="w-5 h-5 text-black" />
                 </button>
                 <h2 className="text-xl font-bold mb-4 flex items-center space-x-2">
-                    <Info className="w-6 h-6" />
+                    <Info className="w-6 h-6 text-black" />
                     <span>Information</span>
                 </h2>
-                <p className="mb-4">
+                <p className="mb-4 text-black">
                     Provide additional details, disclaimers, or any other info users
                     might need. Customize this content as necessary.
                 </p>
                 <button
                     onClick={onClose}
-                    className="inline-flex items-center px-4 py-2 mt-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 mt-2 bg-blue-600 text-black rounded hover:bg-blue-700"
                 >
                     Close
                 </button>

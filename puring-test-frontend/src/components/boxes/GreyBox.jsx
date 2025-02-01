@@ -6,9 +6,9 @@ const GreyBox = ({
   imageUrl,
 }) => {
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex flex-col items-center justify-between p-6 w-full aspect-square rounded-xl bg-gray-200 text-gray-900 text-center shadow-xl">
-        <div className="flex-grow flex items-center w-full">
+    <div className="h-[calc(100%+2rem)] flex flex-col">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 w-full aspect-square rounded-xl bg-gray-200 text-gray-900 text-center shadow-xl">
+        <div className="flex-grow flex items-center justify-center w-full">
           {imageUrl ? (
             <img 
               src={imageUrl} 
