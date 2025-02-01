@@ -1,14 +1,10 @@
-from google import genai
-from google.genai import types
+from openai import OpenAI
 import random
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.getenv("GEMINI_API_KEY")
-
-genai.configure(api_key=API_KEY)
-client = genai.Client(api_key='GEMINI_API_KEY')
+client = OpenAI()
 
 
 prompts = [
@@ -44,16 +40,14 @@ def gen_image_clue(answer):
     Your image should hint at {} but not reveal it.
     """.format(prompt, answer)
 
-    response = client.models.generate_image(
-        model='imagen-3.0-generate-002',
+    response = client.images.generate(
+        model="dall-e-3",
         prompt=full_prompt,
-        config=types.GenerateImageConfig(
-            # negative_prompt= 'people',
-            number_of_images = 1,
-            include_rai_reason= True,
-            output_mime_type= 'image/jpeg'
-        )
-    )   
+        size="1024x1024",
+        quality="standard",
+        response_format="b64_json",
+        n=1,
+    )
+    return prompt, response.data[0].b64_json
 
-    print(response.text)
-    return prompt, response.text
+gen_image_clue("Dune 2")
