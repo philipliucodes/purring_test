@@ -3,12 +3,16 @@ import './App.css'
 import Header from './components/Header'
 import BoxList from './components/boxes/BoxList'
 import AnswerInput from './components/AnswerInput'
+import Congratulations from './components/Congratulations'
 
 const INITIAL_REWARD_POINTS = 100
+const CORRECT_ANSWER = "speaker" // This will come from your backend later
+const INCORRECT_ANSWER_PENALTY = 1
 
 function App() {  
   const [rewardPoints, setRewardPoints] = useState(INITIAL_REWARD_POINTS)
   const [answer, setAnswer] = useState('')
+  const [showCongrats, setShowCongrats] = useState(false)
 
   // Function to decrease rewards only
   const decreaseReward = (deduction) => {
@@ -24,12 +28,24 @@ function App() {
   }
 
   const handleSubmit = () => {
-    // TODO: Add submit logic here
-    console.log('Submitted answer:', answer)
+    const normalizedAnswer = answer.toLowerCase().trim()
+    const normalizedCorrectAnswer = CORRECT_ANSWER.toLowerCase()
+
+    if (normalizedAnswer === normalizedCorrectAnswer) {
+      setShowCongrats(true)
+    } else if (normalizedAnswer !== '') { // Only penalize if answer isn't empty
+      decreaseReward(INCORRECT_ANSWER_PENALTY)
+    }
   }
 
   const handleClear = () => {
     setAnswer('')
+  }
+
+  const handleCongratsClose = () => {
+    setShowCongrats(false)
+    setAnswer('')
+    // Additional reset logic can go here
   }
 
   return (
@@ -49,6 +65,8 @@ function App() {
           />
         </div>
       </div>
+      
+      {showCongrats && <Congratulations onClose={handleCongratsClose} />}
     </>
   )
 }

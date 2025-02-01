@@ -4,16 +4,23 @@ import BlueBox from './BlueBox';
 import GreyBox from './GreyBox';
 
 const BoxList = ({ onDecrease }) => {
-  const [generatedBoxes, setGeneratedBoxes] = useState({
-    0: false,
-    1: false,
-    2: false
+  const [generatedContent, setGeneratedContent] = useState({
+    0: null,
+    1: null,
+    2: null
   });
 
   const handleGenerate = (index, deduction) => {
-    setGeneratedBoxes(prev => ({
+    // Simulated content - replace with actual API response later
+    const content = index === 2 ? {
+      imageUrl: 'https://example.com/image.jpg'  // Example image URL
+    } : {
+      generatedText: "And blood-black nothingness began to spin... A system of cells interlinked within cells interlinked within cells interlinked within one stem... And dreadfully distinct against the dark, a tall white fountain played."
+    };
+
+    setGeneratedContent(prev => ({
       ...prev,
-      [index]: true
+      [index]: content
     }));
     onDecrease(deduction);
   };
@@ -39,10 +46,11 @@ const BoxList = ({ onDecrease }) => {
   return (
     <div className="grid grid-cols-3 gap-4 mb-8">
       {boxes.map((box, index) => (
-        generatedBoxes[index] ? (
+        generatedContent[index] ? (
           <GreyBox 
             key={index}
             prompt={box.prompt}
+            {...generatedContent[index]}
           />
         ) : (
           <BlueBox 
