@@ -21,7 +21,8 @@ text_clue_prompts = [
 generation_config = genai.GenerationConfig(temperature=0.9, max_output_tokens=100)
 
 def gen_text_clue(answer):
-    prompt = random.choice(text_clue_prompts).format(answer)
+    orig_prompt = random.choice(text_clue_prompts)
+    prompt = orig_prompt.format(answer)
     print("Prompt: ", prompt)
     full_prompt = """
     {}
@@ -29,4 +30,4 @@ def gen_text_clue(answer):
     """.format(prompt, answer, answer)
     response = model.generate_content(full_prompt, generation_config=generation_config)
     print(response.text)
-    return prompt, response.text
+    return orig_prompt, response.text

@@ -32,7 +32,8 @@ prompts = [
 ]
 
 def gen_image_clue(answer):
-    prompt = random.choice(prompts).format(answer)
+    orig_prompt = random.choice(prompts)
+    prompt = orig_prompt.format(answer)
     print("Prompt: ", prompt)
     full_prompt = f"{prompt}. Your image should hint at {answer} but not reveal it."
 
@@ -44,4 +45,4 @@ def gen_image_clue(answer):
         response_format="b64_json",
         n=1,
     )
-    return prompt, response.data[0].b64_json
+    return orig_prompt, response.data[0].b64_json

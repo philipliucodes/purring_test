@@ -10,21 +10,32 @@ const BoxList = ({ onDecrease }) => {
     2: null
   });
 
+  const [gameData, setGameData] = useState([]);
+
   useEffect(() => {
     const getGameData = async () => {
-      const game_data = await fetch('http://localhost:5000/new_game')
-      const game_data_json = await game_data.json()
-      console.log(game_data_json)
-      return game_data_json;
-    }
-    const game_data = getGameData();
-    console.log(game_data);
+      try {
+        console.log("fetching game data");
+        const response = await fetch('http://127.0.0.1:5000/api/new_game');
+        const data = await response.json();
+        console.log("Received game data:", data);
+        setGameData(data);  // Set the actual data, not the Promise
+      } catch (error) {
+        console.error("Error fetching game data:", error);
+      }
+    };
+    
+    getGameData();  // Call the function directly
   }, []);
+
+  useEffect(() => {
+    console.log(gameData);
+  }, [gameData]);
 
   const handleGenerate = (index, deduction) => {
     // Simulated content - replace with actual API response later
     const content = index === 2 ? {
-      imageUrl: 'https://example.com/image.jpg'  // Example image URL
+      imageUrl: ''  // Example image URL
     } : {
       generatedText: "And blood-black nothingness began to spin... A system of cells interlinked within cells interlinked within cells interlinked within one stem... And dreadfully distinct against the dark, a tall white fountain played."
     };
@@ -56,22 +67,24 @@ const BoxList = ({ onDecrease }) => {
 
   return (
     <div className="grid grid-cols-3 gap-4 mb-8">
-      {boxes.map((box, index) => (
-        generatedContent[index] ? (
+      {gameData.length>0 && gameData.map((game, index) => {
+        const box = boxes[index]; 
+        return generatedContent[index] ? (
           <GreyBox 
             key={index}
-            prompt={box.prompt}
-            {...generatedContent[index]}
+            prompt={game.prompt}
+            imageUrl={game.clue_type === "image" ? game.clue : null}
+            generatedText={game.clue_type === "text" ? game.clue : null}
           />
         ) : (
           <BlueBox 
             key={index}
-            prompt={box.prompt}
+            prompt={game.prompt}
             buttonText={box.buttonText}
             onGenerate={() => handleGenerate(index, box.deduction)}
           />
         )
-      ))}
+      })}
     </div>
   );
 };
