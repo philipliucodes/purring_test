@@ -30,7 +30,7 @@ const Congratulations = ({ onClose }) => {
       />
       <div className="bg-white rounded-xl p-8 text-center shadow-2xl">
         <h2 className="text-3xl font-bold mb-4">Congratulations! 🎉</h2>
-        <p className="text-xl mb-6">You got the correct answer!</p>
+        <p className="text-xl mb-6">Good boy</p>
         <button
           onClick={onClose}
           className="px-6 py-2 bg-blue-500 text-black font-semibold rounded-lg 

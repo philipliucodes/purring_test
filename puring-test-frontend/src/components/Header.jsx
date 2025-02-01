@@ -174,6 +174,11 @@ const HelpModal = ({ isOpen, onClose }) => {
     )
 }
 
+HelpModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
+};
+
 /**
  * InfoModal: Simple example of a modal component.
  */
@@ -220,3 +225,8 @@ const InfoModal = ({ isOpen, onClose }) => {
         </motion.div>
     )
 }
+
+InfoModal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired
+};
